@@ -2,12 +2,7 @@
 title: "draft"
 author: "Hannah Luebbering"
 date: "6/23/2020"
-output: Markdown
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## Part One: Shiny
 
