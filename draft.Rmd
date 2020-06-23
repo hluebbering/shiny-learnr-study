@@ -2,7 +2,7 @@
 title: "draft"
 author: "Hannah Luebbering"
 date: "6/23/2020"
-output: html_document
+output: Markdown
 ---
 
 ```{r setup, include=FALSE}
