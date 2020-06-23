@@ -6,7 +6,7 @@
 
 Modules used for a randomized trial where students would be randomly assigned to the `tidyverse` or `base` method of **learning R**
 
-Paper on tools used to build a `randomized trial`:
+Overview:
 
 1.	A short literature review
 
