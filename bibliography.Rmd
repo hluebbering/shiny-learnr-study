@@ -4,4 +4,3 @@ bibliography: references.bib
 nocite: '@*'
 ---
 
-citation("ggplot2")
