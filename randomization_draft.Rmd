@@ -1,6 +1,8 @@
 ---
 title: "Building Randomization in a shiny application"
 output: github_document
+bibliography: references2.bib
+nocite: '@*'
 ---
 
 ```{r setup, include=FALSE}

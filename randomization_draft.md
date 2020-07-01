@@ -43,3 +43,15 @@ With the server function performing the calculations, and the UI
 function building the user-facing side of the application, a dynamic and
 interactive shiny app solves many statistical problems tied together
 with one software mechanism.
+
+<div id="refs" class="references hanging-indent">
+
+<div id="ref-Lucymcgowan/Talks">
+
+McGowan, Lucy D’Agostino. 2020. “Best Practices for Teaching R a
+Randomized Controlled Trial.” Presentation. *Lucymcgowan.com/Talks*.
+[ocs.google.com/presentation/d/1kOtqXMWhNE6OjInt32PnkBC\_j\_GfVQ-rJKzFxOn29yM/edit?usp=sharing](ocs.google.com/presentation/d/1kOtqXMWhNE6OjInt32PnkBC_j_GfVQ-rJKzFxOn29yM/edit?usp=sharing).
+
+</div>
+
+</div>
