@@ -1,0 +1,15 @@
+---
+title: "Using learnr to collect data"
+output: github_document
+bibliography: references2.bib
+nocite: '@*'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Rough Draft
+
+#### Using learnr to collect data 
+
