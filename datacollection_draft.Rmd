@@ -1,5 +1,5 @@
 ---
-title: "Using learnr to collect data"
+title: "Collecting data using learnr"
 output: github_document
 bibliography: references/references2.bib
 nocite: '@*'
@@ -16,7 +16,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Rough Draft
 
-#### Using learnr to collect data 
+- Demographic data
+
+- Assessment data
+
+- Exercise data
+
+### shiny + learnr + rdrop2 for data collection 
 
 ```{r figure1, eval=FALSE}
 library(rdrop2)
@@ -29,63 +35,26 @@ saveRDS(token, "droptoken.rds")
 drop_auth(rdstoken = "droptoken.rds")
 ```
 
-
+### Function outline
 
 ```{r figure2, eval=FALSE}
 event_recorder <- function(tutorial_id, tutorial_version, user_id, event, data) {
   
   # code goes here
   
+  
+  
 }
 
 options(tutorial.event_recorder = event_recorder)
 ```
 
+
+### Filling in function
+
+
 ```{r figure2a, eval=FALSE}
-  ... {
-
-if (drop_exists(glue("teaching-r-study/data_{user_id}.rds"))) { 
-  
-  drop_download(path = glue("teaching-r-study/data_{user_id}.rds"),
-                local_path = glue("data_{user_id}.rds"),
-                overwrite = TRUE) }
-  
-  t <- readRDS(glue("data_{user_id}.rds"))
-  
-else {# code goes here} 
-  
-  ...
- 
-}
-
-```
-
-### data frame, t
-
-```{r  out.width = "25%", echo=FALSE}
-include_graphics("images/figure4.png")
-
-```
-
-
-```{r figure4, eval=FALSE}
-...
-
-else {
-  t <- tibble(
-    time = .POSIXct(numeric(0)), 
-    tutorial_id = character(), 
-    tutorial_version = character(), 
-    user_id = character(),
-    event = character(),
-    data = list())
-}
-
-```
-
-```{r figure5, eval=FALSE}
-
-{
+event_recorder <- function(tutorial_id, tutorial_version, user_id, event, data) {
   
   if (drop_exists(glue("teaching-r-study/data_{user_id}.rds"))) {
     
@@ -97,16 +66,166 @@ else {
     
     ...
     
-    }
+  }
   
-  # code goes here
+  ...
   
-}
+  
+  }
 
 ```
 
+------------------------------------------------------------------------------------------
+
+#### Part 1. 
+
+```{r figure2b, eval=FALSE}
+  ... {
+    
+    if (drop_exists(glue("teaching-r-study/data_{user_id}.rds"))) {
+      
+      # code goes here 
+      
+      }
+    
+    # code goes here
+    
+    
+    else {
+      ...
+      }
+    ...
+    }
+```
+
+
+```{r figure2ba, eval=FALSE}
+  ... {
+    
+    if (drop_exists(glue("teaching-r-study/data_{user_id}.rds"))) {
+      
+      drop_download(path = glue("teaching-r-study/data_{user_id}.rds"),
+                    
+                    local_path = glue("data_{user_id}.rds"),
+                    
+                    overwrite = TRUE) }
+    
+    # code goes here
+    
+    
+    else {
+      ...
+      }
+    ...
+    }
+```
+
+
+```{r figure2bb, eval=FALSE}
+  ... {
+    if (drop_exists(glue("teaching-r-study/data_{user_id}.rds"))) {
+      drop_download(path = glue("teaching-r-study/data_{user_id}.rds"),
+                    local_path = glue("data_{user_id}.rds"),
+                    overwrite = TRUE) }
+    
+    t <- readRDS(glue("data_{user_id}.rds"))
+    
+    
+    else {
+      ...
+      }
+    ...
+    }
+```
+
+
+**data frame, t**
+
+```{r  out.width = "25%", echo=FALSE}
+include_graphics("images/figure4.png")
+
+```
+
+------------------------------------------------------------------------------------------
+
+
+#### Part 2
+
+```{r figure3, eval=FALSE}
+  ... {
+    if (drop_exists(glue("teaching-r-study/data_{user_id}.rds"))) {
+      drop_download(path = glue("teaching-r-study/data_{user_id}.rds"),
+                    local_path = glue("data_{user_id}.rds"),
+                    overwrite = TRUE) }
+    t <- readRDS(glue("data_{user_id}.rds"))
+    
+    
+    else {
+      
+      # code goes here
+      
+    }
+    
+    ...
+    }
+```
+
+
+
+```{r figure4, eval=FALSE}
+... {
+  ...
+  
+  else {
+    t <- tibble(
+      time = .POSIXct(numeric(0)),
+      tutorial_id = character(),
+      tutorial_version = character(),
+      user_id = character(),
+      event = character(),
+      data = list())
+  }
+  
+  ...
+}
+```
+
+```{r  out.width = "25%", echo=FALSE}
+include_graphics("images/figure4.png")
+
+```
+
+------------------------------------------------------------------------------------------
+
+#### Part 3
+
+```{r figure5, eval=FALSE}
+... {
+  if (drop_exists(glue("teaching-r-study/data_{user_id}.rds"))) {
+    drop_download(path = glue("teaching-r-study/data_{user_id}.rds"),
+                  local_path = glue("data_{user_id}.rds"),
+                  overwrite = TRUE) }
+  t <- readRDS(glue("data_{user_id}.rds"))
+  
+  else {t <- tibble(
+    time = .POSIXct(numeric(0)),
+    tutorial_id = character(),
+    tutorial_version = character(),
+    user_id = character(),
+    event = character(),
+    data = list())}
+  
+  
+  # code goes here
+  
+  
+}
+```
+
+
+
 ```{r figure6, eval=FALSE}
-{ 
+... {
   
   ...
   
@@ -119,11 +238,8 @@ else {
     data = list(data))
     )
   
-  # code goes here
-
 
 }
-
 ```
 
 ```{r  out.width = "40%", echo=FALSE}
@@ -131,16 +247,61 @@ include_graphics("images/figure5.png")
 
 ```
 
-
 ```{r figure7, eval=FALSE}
-{
+... {
+  
   ...
+  
+  t <- bind_rows(t, tibble(
+    time = Sys.time(),
+    tutorial_id = tutorial_id,
+    tutorial_version = tutorial_version,
+    user_id = user_id,
+    event = event,
+    data = list(data)))
+  
   
   saveRDS(t, file = glue("data_{user_id}.rds"))
   drop_upload(file = glue("data_{user_id}.rds"),
               path = "teaching-r-study")
-
+  
 }
+```
+
+------------------------------------------------------------------------------------------
+
+#### Putting it all together
+
+```{r figure7a, eval=FALSE}
+event_recorder <- function(tutorial_id, tutorial_version, user_id, event, data) {
+  
+  if (drop_exists(glue("teaching-r-study/data_{user_id}.rds"))) {
+    drop_download(path = glue("teaching-r-study/data_{user_id}.rds"),
+                  local_path = glue("data_{user_id}.rds"),
+                  overwrite = TRUE) }
+  
+  t <- readRDS(glue("data_{user_id}.rds"))
+  
+  else {t <- tibble(
+    time = .POSIXct(numeric(0)),
+    tutorial_id = character(),
+    tutorial_version = character(),
+    user_id = character(),
+    event = character(),
+    data = list())}
+  
+  t <- bind_rows(t, tibble(
+    time = Sys.time(),
+    tutorial_id = tutorial_id,
+    tutorial_version = tutorial_version,
+    user_id = user_id,
+    event = event,
+    data = list(data)))
+  
+  saveRDS(t, file = glue("data_{user_id}.rds"))
+  drop_upload(file = glue("data_{user_id}.rds"),
+              path = "teaching-r-study")
+  }
 ```
 
 
@@ -152,6 +313,7 @@ question_is_correct.always_correct <- function(question, value, ...) {
   return(mark_as(TRUE, message = NULL))
 }
 ```
+
 
 ```{r figure9, eval=FALSE}
 question("This is your question?",
