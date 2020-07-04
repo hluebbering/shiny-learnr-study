@@ -1,7 +1,7 @@
 ---
 title: "Using learnr to collect data"
 output: github_document
-bibliography: references2.bib
+bibliography: references/references2.bib
 nocite: '@*'
 ---
 
