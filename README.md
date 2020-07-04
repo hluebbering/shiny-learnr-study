@@ -1,25 +1,56 @@
-# RStudio
-
-## `Shiny App` and `Learnr Package`:
+Shiny App and Learnr Package:
+================
 
 ### Tools used to create randomized trial
 
-Modules used for a randomized trial where students would be randomly assigned to the `tidyverse` or `base` method of **learning R**
+Creating a `short literature review` and `writing up methods` based on
+modules used for a randomized trial that randomly assigns students to
+the **tidyverse** or **base** modality for learning R.
 
-Overview:
+-----
 
-1.	A short literature review
+### Part One
 
-2.	Writing up methods 
+    Shiny app and learnr package
 
-#### Rough Draft Outline:  
+**Research**
 
-1.	1-2 paragraphs on `Shiny` with citations
+    Find papers where 
+    
+      i. a shiny app was used for a randomized controlled trial
+      
+      ii. research on conducting randomized experiments online 
 
-2.	1 paragraph on the `learnr package` 
+**Write-up**
 
-3.	Find papers where a Shiny app was used for a `randomized controlled trial`
+    i. Shiny- one to two paragraphs with citations
+    
+    ii. Learnr- one paragraph on the learnr package
 
-4.	Find papers and research on conducting randomized experiments `online`
+-----
 
+### Part Two
 
+    Randomization and collection of data 
+
+**Write-up**
+
+    Tutorial style paper that walks through how to do the following steps
+    
+      i. Building Randomization in a shiny application
+    
+      ii. Using learnr to collect data
+
+-----
+
+<div id="refs" class="references hanging-indent">
+
+<div id="ref-Lucymcgowan/Talks">
+
+McGowan, Lucy D’Agostino. 2020. “Best Practices for Teaching R a
+Randomized Controlled Trial.” Presentation. *Lucymcgowan.com/Talks*.
+[ocs.google.com/presentation/d/1kOtqXMWhNE6OjInt32PnkBC\_j\_GfVQ-rJKzFxOn29yM/edit?usp=sharing](ocs.google.com/presentation/d/1kOtqXMWhNE6OjInt32PnkBC_j_GfVQ-rJKzFxOn29yM/edit?usp=sharing).
+
+</div>
+
+</div>
