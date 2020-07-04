@@ -19,7 +19,9 @@ or base first group. The random crossover trial was built using the R
 Shiny application. A shiny app is a directory structured by two main
 functions: a server function and a user interface (UI) function.
 
-<img src="images/figure1.png" width="30%" />
+``` r
+shinyApp(ui = ui, server = server)
+```
 
 The server function is a set of instructions that build the
 application’s computational components and run complex R code behind
@@ -34,21 +36,50 @@ the uniform variable is greater than 0.5, A will be the output;
 otherwise, B will be the output. The last line of the function makes
 sure that the created random variable will not suspend when hidden.
 
-<img src="images/figure2.png" width="40%" />
+``` r
+server <- function(input, output) { 
+  output$random <- reactive({
+    ifelse(runif(1) > 0.5, "A", "B") })
+  
+  outputOptions(output, "random", suspendWhenHidden = FALSE) }
+```
 
 The UI function is a set of instructions for the webpage’s layout and
 appearance; hence, it builds the user-facing side of the application.
 The conditional panels allow for a set of elements to dynamically show
 or hide, depending on if meeting the given conditions. In this study,
 the UI function contains two conditional panels for groups A and B. The
-selection control only appears when meeting the requirements. If the
-random output is A, then the action button opens a new window to the
-shiny app of order A. If the random output is B, then the action button
-opens a new window to the shiny app of order B.
+selection control only appears when meeting the requirements.
 
-<img src="images/figure3.png" width="35%" />
+If the random output is A, then the action button opens a new window to
+the shiny app of order A.
 
-<img src="images/figure3b.png" width="35%" />
+``` r
+ui <- shinyUI( ...
+               conditionalPanel(
+                 condition = "output.random == 'A'", actionButton(
+                   inputId = "yes",
+                   label = "Yes, I agree to this study",
+                   icon = icon("check"),
+                   onclick = "window.open('http://link-to-order-A.html')"
+                   ))
+               ...)
+```
+
+If the random output is B, then the action button opens a new window to
+the shiny app of order B.
+
+``` r
+ui <- shinyUI( ...
+               conditionalPanel(
+                 condition = "output.random == 'B'", actionButton(
+                   inputId = "yes",
+                   label = "Yes, I agree to this study",
+                   icon = icon("check"),
+                   onclick = "window.open('http://link-to-order-B.html')"
+                   ))
+               ...)
+```
 
 With the server function performing the calculations, and the UI
 function building the user-facing side of the application, a dynamic and
