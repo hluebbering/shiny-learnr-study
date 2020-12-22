@@ -7,62 +7,51 @@ Collecting data using learnr
 
 -----
 
-By collecting data on each user interaction through a shiny application,
-we can assess countless evidence of a module’s success in teaching basic
-data manipulation tasks. For this study, the R tutorial collects three
-types of datasets: demographic, assessment, and exercise data.
-
-The **demographic data** collects information on the user’s description,
-such as data science experience, studies, interests, age, gender, etc.
-
-The **assessment data** pulls in each user attempt of a given data
-manipulation task.
-
-The **exercise data** gathers user performance on the learnr module’s
-interactive tasks assigned a console where students can try to type it
-out themselves.
-
-All of this data combined permits a way to assess student comprehension
-and understanding of a given modality.
-
------
+Ideally all data collection can be completed on the same platform. This section describes how to collect demographic, assessment, and exercise data from shiny and store it for future analysis. 
 
 The three main tools that permit automatic and continuous data
-collection are the **shiny, rdrop2, and learnr packages** in R. First,
-install the rdrop2 package, which provides the dropbox package. Dropbox
-continuously collects and stores user data. We start the learner module
-from the main code of rdrop2, which contains the link between R and
-`dropbox`.
+collection are **Shiny**, the **rdrop2** package, which allows for integration with Dropbox, and the **learnr** package in R.  **Shiny** provides the overall platform, the integration with Dropbox allows the user to
+continuously collect and store participant data, and **learnr** allows the participant to input responses. 
+
+#### Dropbox integration
+
+In order to continuously save data on Dropbox, the user needs:
+1. A Dropbox account
+2. A _token_ to allow access to this account from R
 
 Outside of the shiny app, we create a token for the authentications and
-save it as an RDS file. This process makes sure the app can communicate
-with the dropbox. In the app itself, we then reference the token (saved
-as an RDS file), and the authentications to get the app in cahoots with
-the dropbox. Once authenticated, we can tie into learnr to pull data
-from each student’s interaction: clicks, completions, skips, attempts,
+save it as an .RDS file (Code 1). This process allows the application to communicate
+with Dropbox. In the app itself, we then reference the token (Code 2). Once authenticated, we can tie into learnr to pull data
+from each particpant’s interactions: clicks, completions, skips, attempts,
 results, etc.
 
+The following code outlines how to create and d
 ``` r
 library(rdrop2)
 
-# outside the shiny app
 token <- drop_auth()
 saveRDS(token, "droptoken.rds")
+```
+**Code 1.** Creating a Dropbox token. This code is run _outside_ the Shiny application. 
+
+```r
+library(rdrop2)
 
 # inside the shiny app
 drop_auth(rdstoken = "droptoken.rds")
 ```
+**Code 2.** Referencing a Dropbox token to authenticate a user. This code is run once _inside_ the Shiny application. 
 
------
+#### Recording responses with learnr
 
-At this point, we start a new r code block, which has the function of
-recording every interaction of student records in R. The function has
+In order to save participant inputs, we need to set an _event recorder_. Code 3 outlines a function that can be used to record every participant interaction in the application. The function has
 five inputs: the tutorial id, tutorial version, user id, event, and
-data. For any given user, the user id, events, and data will be unique.
-Hence, each user classifies under a unique identifier, completes
+data. For any given participant, the user id, events, and data will be unique.
+Hence, each participant classifies under a unique identifier, completes
 exclusive events (completing an exercise, skipping a section, answering
 a demographic survey, etc.), and links to an individual data that lists
-each event results.
+each event results. We then set the tutorial
+event recorder by specifying the created function in the `options` (Code 4).
 
 ``` r
 event_recorder <- function(tutorial_id, 
@@ -78,16 +67,9 @@ event_recorder <- function(tutorial_id,
 
 options(tutorial.event_recorder = event_recorder)
 ```
+**Code 4**. Code scaffolding for including an event recorder.
 
-User ID is an essential mechanism for tracking individual progress in
-the learner module. Hence, a student can leave the tutorial and return
-where they left off since all development automatically stores in their
-id. At the end of the r code block, the learner module sets the tutorial
-event recorder to the recorder created for the study.
 
------
-
-Now, we fill in the essential part of the function.
 
 ``` r
 event_recorder <- function(tutorial_id, tutorial_version, user_id, event, data) {
