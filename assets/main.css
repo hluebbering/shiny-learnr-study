@@ -1,0 +1,386 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Trocchi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url(//db.onlinewebfonts.com/c/0a086e32e41c5e5960b26626757f07f3?family=Apercu);
+@import url(https://cdn.jsdelivr.net/gh/tonsky/FiraCode@4/distr/fira_code.css);
+
+/** CUSTOM CSS **/
+
+h1 {
+  font-family: 'Noto Serif TC', serif;
+  color: black;
+  font-size: 1.4em;
+}
+h1.title {
+  font-family: 'Noto Serif TC', serif;
+  color: black;
+  font-size: 1.4em;
+}
+.author{
+  font-family: 'Noto Serif TC', serif;
+  color: #528B8B;
+  font-size:14px;
+  margin: 2px;
+}
+
+.date{
+  font-family: 'Noto Serif TC', serif;
+  color: #528B8B;
+  font-size:14px;
+  margin: 2px;
+}
+
+.subtitle{
+  font-family: 'Noto Serif TC', serif;
+  color: #2F4F4F;
+  font-size:18px;
+  margin: 2px;
+  margin-top: -2px;
+}
+figure{
+  font-family: 'Vollkorn', serif;
+}
+
+.figure{
+  font-family: 'Vollkorn', serif;
+}
+h2 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.2em !important;
+  color: #1c253c;
+}
+    
+h3 {
+  /*font-family: 'Crimson Pro', serif;*/
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.94em !important;
+  color: #1f3e5a;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-bottom: 1px;
+}
+h4 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.8em !important;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  font-weight: bold;
+  
+}
+h5 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.7em !important;
+  margin-block-start: .5em;
+  margin-block-end: .5em;
+  font-weight: bold;
+}
+
+body {
+  font-family: "Times New Roman", Times, serif;
+  /*margin: 30.6px;*/
+  font-size: 11pt;
+  color: black;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-font-feature-settings: "liga" on;
+  
+}
+
+p {
+   font-size: 11pt;
+   padding: 1.4px;
+   line-height: 1.5em;
+   color: black;
+   margin-block-start: 0.5em;
+   margin-block-end: 0.5em;
+   font-family: "Times New Roman", Times, serif;
+}
+
+p.caption {
+  font-size: 9.6pt;
+  color: black;
+  font-family: PT Sans Caption;
+  font-weight: 500;
+}
+
+a {
+  color: #f88379;
+}
+
+.sp0 {
+  font-family: Apercu;
+  color:#FDB05A;
+  font-size: 16pt;
+  padding: 0;
+  font-weight: bold;
+}
+
+.lp0 {
+  font-family: Apercu;
+  color:#FDB05A;
+  font-size:12.2pt;
+  padding: 1px;
+}
+
+.sp1 {
+  font-family: Apercu;
+  color:#FF9173;
+  font-size: 16pt;
+  padding: 0;
+  font-weight: bold;
+}
+
+.lp1 {
+  font-family: Apercu;
+  color:#FF9173;
+  font-size:12.2pt;
+  padding: 1px;
+}
+
+.sp2 {
+  font-family: Apercu;
+  color:#FF6161;
+  font-size: 16pt;
+  padding: 1px;
+}
+.lp2 {
+  font-family: Apercu;
+  color:#FF6161;
+  font-size:12.2pt;
+  padding: 1px;
+}
+
+.sp3 {
+  font-family: Apercu;
+  color:#EC4E8D;
+  font-size: 16pt;
+  padding: 1px;
+}
+.lp30 {
+  font-family: Apercu;
+  color:#EC4E8D;
+  font-size:12.2pt;
+  padding: 1px;
+}
+.lp3 {
+  font-family: Apercu;
+  color:#fc89ac;
+  font-size:12.2pt;
+  padding: 1px;
+}
+.lp32 {
+  font-family: Apercu;
+  color:#F347C0;
+  font-size:12.2pt;
+  padding: 1px;
+}
+
+.sp4 {
+  font-family: Apercu;
+  color:#9536B3;
+  font-size: 16pt;
+  padding: 1px;
+}
+
+.lp4 {
+  font-family: Apercu;
+  color:#9536B3;
+  font-size:12.2pt;
+  padding: 1px;
+}
+
+.sp5 {
+  font-family: Apercu;
+  color:#884FD1;
+  font-size: 16pt;
+  padding: 1px;
+}
+
+.lp5 {
+  font-family: Apercu;
+  color:#884FD1;
+  font-size:12.2pt;
+  padding: 1px;
+}
+
+.sp6 {
+  font-family: Apercu;
+  color:#7B68EE;
+  font-size: 16pt;
+  padding:0;
+}
+.lp6 {
+  font-family: Apercu;
+  color:#7B68EE;
+  font-size:12.2pt;
+  padding: 1px;
+}
+
+.sp7 {
+  font-family: Apercu;
+  color:#4682b4;
+  font-size: 16pt;
+  padding: 1px;
+}
+.lp7 {
+  font-family: Apercu;
+  color:#4682b4;
+  font-size:12.2pt;
+  padding: 1px;
+}
+.sp8 {
+  font-family: Apercu;
+  color:#00b7eb;
+  font-size: 16pt;
+  padding: 1px;
+}
+
+.lp8 {
+  font-family: Apercu;
+  color:#00b7eb;
+  font-size:12.2pt;
+  padding: 1px;
+}
+
+.sp9 {
+  font-family: Apercu;
+  color:#38BDBB;
+  font-size: 16pt;
+  padding:0;
+}
+
+.lp9 {
+  font-family: Apercu;
+  color:#38BDBB;
+  font-size:12.2pt;
+  padding: 1px;
+}
+
+.sp10 {
+  font-family: Apercu;
+  color:#5CBD92;
+  font-size: 16pt;
+  padding:0;
+}
+
+.lp10 {
+  font-family: Apercu;
+  color:#5CBD92;
+  font-size:12.2pt;
+  padding: 1px;
+}
+
+.sp11 {
+  font-family: Apercu;
+  color:#8fbc8f;
+  font-size: 16pt;
+}
+
+.lp11 {
+  font-family: Apercu;
+  color:#8fbc8f;
+  font-size:12.2pt;
+  padding: 1px;
+}
+
+.sp12 {
+  font-family: Apercu;
+  color:#008080;
+  font-size: 16pt;
+  padding: 1px;
+}
+.lp12 {
+  font-family: Apercu;
+  color:#008080;
+  font-size:12.2pt;
+  padding: 1px;
+}
+
+/*JUSTIN BIEBER JUSTICE COLORS*/ 
+
+.sp13 {
+  font-family: Apercu;
+  color:#47ca9f;
+  font-size: 16pt;
+  padding: 1px;
+}
+
+.lp13 {
+  font-family: Apercu;
+  color: #47ca9f;
+  font-size: 12.2pt;
+  padding: 1px;
+}
+.lp14 {
+  font-family: Apercu;
+  color:#aed17b;
+  font-size:12.2pt;
+  padding: 1px;
+}
+.sp14 {
+  font-family: Apercu;
+  color:#aed17b;
+  font-size: 16pt;
+  padding: 1px;
+}
+.lp15 {
+  font-family: Apercu;
+  color:#34976b;
+  font-size:12.2pt;
+  padding: 1px;
+}
+.lp16 {
+  font-family: Apercu;
+  color:#309ea4;
+  font-size:12.2pt;
+  padding: 1px;
+}
+.lp17 {
+  font-family: Apercu;
+  color:#20696f;
+  font-size:12.2pt;
+  padding: 1px;
+}
+
+/*-------------------------------------*/ 
+
+.sp20 {
+  font-family: Apercu;
+  color:#aed17b;
+  font-size: 16pt;
+  padding: 1px;
+}
+.lp21 {
+  font-family: Apercu;
+  color:#20696f;
+  font-size:12.2pt;
+  padding: 1px;
+}
+
+.example1 {
+    background-color: rgb(245, 245, 245);
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.25em;
+    margin-bottom: 0.5em;
+}
+.definition1 {
+    background-color: #F5FAFF;
+    border: 1px solid lightgray;
+    border-radius: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 0.25em;
+    padding-top: 0.25em;
+}
+
+

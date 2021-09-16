@@ -9,7 +9,7 @@ students learn R tools, and their ability to complete primary data
 manipulation tasks. Based on randomization, students learn either
 tidyverse or base first and then cross over to learn the other modality.
 
-<img src="images/picture1.png" width="20%" />
+<img src="assets/images/picture1.png" width="20%" />
 
 This study used the Shiny software package to create this cross-random
 trial. This package can host a shiny application as a website that runs

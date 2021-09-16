@@ -153,7 +153,7 @@ dataset remains unique for each student.
 
 **data frame, t**
 
-<img src="images/figure4.png" width="25%" />
+<img src="assets/images/figure4.png" width="25%" />
 
 -----
 
@@ -181,7 +181,7 @@ tutorial id, tutorial version, user id, event, and data.
 }
 ```
 
-<img src="images/figure4.png" width="25%" />
+<img src="assets/images/figure4.png" width="25%" />
 
 -----
 
@@ -218,7 +218,7 @@ frame, which takes the original data frame and adds an extra row.
 }
 ```
 
-<img src="images/figure5.png" width="40%" />
+<img src="assets/images/figure5.png" width="40%" />
 
 Lastly, we instruct the code to save the RDS so that, whenever a user
 interacts with the tutorial, the function automatically appends a new
@@ -309,7 +309,7 @@ copious amounts of data by using the tidycode and Matahari packages;
 these packages provide a way to capture and analyze the code in the
 tutorial.
 
-<img src="images/figure6.png" width="65%" />
+<img src="assets/images/figure6.png" width="65%" />
 
 First, check the data’s labels, which path a particular event where the
 information recording occurs. To ease the organization, we can change
