@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="DM Data Science Lab | Hannah Luebbering &amp; Lucy McGowan" />
+
+<meta name="date" content="2020-06-17" />
+
+<title>Shiny and Learnr in Randomized Trials</title>
+
+<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="assets/main.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Shiny + Learnr Study</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Shiny and Learnr in Randomized Trials</h1>
+<h3 class="subtitle">Examining Best Practices in Teaching Data Science</h3>
+<h4 class="author">DM Data Science Lab | Hannah Luebbering &amp; Lucy McGowan</h4>
+<h4 class="date">June 17, 2020</h4>
+
+</div>
+
+
+<div id="shiny-applications" class="section level2">
+<h2>Shiny Applications</h2>
+<p>Shiny is an R package developed for building interactive web applications. Visual outputs resemble an easy-to-visit website offering instant feedback from user input. The code written in the Shiny application framework controls the interface. Within the framework, the Shiny package offers highly interactive tools such as widgets for simplicity of use for application programmers and users. Without needing to adjust the source code, users can interact with the flexible user interface and see the change of inputs immediately reflected in the output. The interactive nature allows users to change parameters, run R code, and see results directly from their browser.</p>
+<div id="building-randomization-in-a-shiny-application" class="section level3">
+<h3>Building Randomization in a Shiny application</h3>
+<p>When studying the best practices for teaching R, a randomized controlled trial assesses whether there is a relationship between the order students learn R tools, and their ability to complete data manipulation tasks. Based on randomization, students learn either <code>tidyverse</code> or base first and then cross over to learn the other modality.</p>
+<div class="figure" style="text-align: center">
+<img src="assets/images/picture1.jpg" alt="Figure  1: Crossover randomized trial." height="180" />
+<p class="caption">
+Figure 1: Crossover randomized trial.
+</p>
+</div>
+<p>This study used the Shiny package to create this cross-random trial. The Shiny package can host a application as a website that runs R code behind the scenes. For example, the study’s informed consent page automatically randomizes the participant into the tidyverse first group or base first group. A Shiny app is a directory structured by two main functions: a server function and a user interface (UI) function.</p>
+<pre class="r"><code>shinyApp(ui = ui, server = server)</code></pre>
+<p>The server function is a set of instructions that build the application’s computational components and run complex R code behind the scenes. In this study, the server function acts as a random number generator to randomize participants into groups <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span>. The function runs a reactive expression containing an R statement, which creates a random uniform variable. If the uniform variable is greater than <span class="math inline">\(0.5\)</span>, A will be the output; otherwise, B will be the output. The last line of the function makes sure that the created random variable will not suspend when hidden.</p>
+<pre class="r"><code>server &lt;- function(input, output) { 
+  output$random &lt;- reactive({
+    ifelse(runif(1) &gt; 0.5, &quot;A&quot;, &quot;B&quot;) })
+  
+  outputOptions(output, &quot;random&quot;, suspendWhenHidden = FALSE) }</code></pre>
+<p>The UI function is a set of instructions for the webpage’s layout and appearance; hence, it builds the user-facing side of the application. The conditional panels allow for a set of elements to dynamically show or hide, depending on if meeting the given conditions. In this study, the UI function contains two conditional panels for groups A and B. The selection control only appears when meeting the requirements.</p>
+<p>If the random output is A, then the action button opens a new window to the Shiny app of order A.</p>
+<pre class="r"><code>ui &lt;- shinyUI( ...
+               conditionalPanel(
+                 condition = &quot;output.random == &#39;A&#39;&quot;, 
+                 actionButton(
+                   inputId = &quot;yes&quot;,
+                   label = &quot;Yes, I agree to this study&quot;,
+                   icon = icon(&quot;check&quot;),
+                   onclick = &quot;window.open(&#39;http://link-to-order-A.html&#39;)&quot;
+                   ))
+               ...)</code></pre>
+<p>If the random output is B, then the action button opens a new window to the Shiny app of order B using a similar code as above, only replacing ‘A’ with ‘B.’ With the server function performing the calculations, and the UI function building the user-facing side of the application, a dynamic and interactive Shiny app solves many statistical problems tied together with one software mechanism.</p>
+<hr />
+</div>
+</div>
+<div id="learnr-package" class="section level2">
+<h2>Learnr Package</h2>
+<p>The learner package can turn any R Markdown document into a collaborative solution for facilitating statistics and R programming tutorials. Building on R Markdown, the learnr package enables interactive tutorials featuring various interactive Shiny components. Users can access these interactive tutorials from their browser, via the same mechanisms as a Shiny application. The code exercises created in the learner package display as R code blocks; the user can edit and execute them directly. Progress is automatically preserved, allowing users to save and keep track of completed exercises or questions.</p>
+<p>In addition to supporting interactive tutorials, the learnr package includes built in tools for checking and reinforcing students’ understanding. Users are free to adjust code-snippets, complete coding exercises, read hints and solutions, and execute their code. In the context of this study, we utilize the learnr package as a tool for hosting online experiments designed to examine best practices for teaching statistical or programming concepts.</p>
+<div id="collecting-data-using-learnr" class="section level3">
+<h3>Collecting data using learnr</h3>
+<p>This section describes how to collect demographic, assessment, and exercise data from a Shiny application and store it for analysis. The three main tools that permit automatic and continuous data collection are <code>shiny</code>, <code>rdrop2</code>, which allows integration with Dropbox, and <code>learnr</code>. Shiny provides the overall platform, the integration with Dropbox allows the user to collect and store participant data, and learnr enables the participant to input responses.</p>
+<div id="dropbox-integration" class="section level4">
+<h4>Dropbox integration</h4>
+<p>In order to continuously save data on Dropbox, the user needs:</p>
+<ol style="list-style-type: decimal">
+<li>A Dropbox account</li>
+<li>A <em>token</em> to allow access to this account from R</li>
+</ol>
+<p>Outside of the Shiny app, we create a token for the authentications and save it as an .RDS file (Code 1). This process allows the application to communicate with Dropbox. In the app itself, we then reference the token (Code 2). Once authenticated, we can tie into learnr to pull data from each participant’s interactions: clicks, completions, skips, attempts, results, etc.</p>
+<pre class="r"><code>library(rdrop2)
+
+token &lt;- drop_auth()
+saveRDS(token, &quot;droptoken.rds&quot;)</code></pre>
+<p><strong>Code 1.</strong> Creating a Dropbox token. This code is run <em>outside</em> the Shiny application.</p>
+<pre class="r"><code>library(rdrop2)
+
+# inside the shiny app
+drop_auth(rdstoken = &quot;droptoken.rds&quot;)</code></pre>
+<p><strong>Code 2.</strong> Referencing a Dropbox token to authenticate a user. This code is run once <em>inside</em> the Shiny application.</p>
+<hr />
+</div>
+<div id="recording-responses-with-learnr" class="section level4">
+<h4>Recording responses with learnr</h4>
+<p>In order to save user input, we need to set up an <em>event recorder</em>. Code 3 outlines a function used to record every participant interaction in the application. The function has five inputs: the tutorial id, tutorial version, user id, event, and data. For any given participant, the user id, events, and data will be unique. Hence, each participant classifies under a unique identifier, completes exclusive events, and links to individual data that lists each event’s results. Then we set up the tutorial event recorder by specifying the created function in options (code 4).</p>
+<pre class="r"><code>event_recorder &lt;- function(tutorial_id, 
+                           tutorial_version,
+                           user_id,
+                           event, 
+                           data)
+  {
+  
+    # code goes here
+  
+  }
+
+options(tutorial.event_recorder = event_recorder)</code></pre>
+<p><strong>Code 4</strong>. Code scaffolding for including an event recorder.</p>
+<hr />
+<p>Now, we’ll define what goes inside of the <em>event_recorder</em> function. The first piece defines the ‘if’ statement; this is where the function searches Dropbox for existing user data. Using the glue package, we instruct the code, in a single command, to search the designated Dropbox folder for previous data under the user’s unique id. If there’s data, the function proceeds to download and override that data to the indicated path.</p>
+<pre class="r"><code>... {
+  if (drop_exists(glue(&quot;teaching-r-study/data_{user_id}.rds&quot;))) {
+    drop_download(path = glue(&quot;teaching-r-study/data_{user_id}.rds&quot;),
+                  local_path = glue(&quot;data_{user_id}.rds&quot;),
+                  overwrite = TRUE) }
+  
+  ... }</code></pre>
+<hr />
+<p>Next, the rds file reads into a local data frame called <span class="math inline">\(t\)</span>. We use the glue package to link the data to the user id, ensuring the dataset remains unique for each student.</p>
+<pre class="r"><code>... {
+  
+  t &lt;- readRDS(glue(&quot;data_{user_id}.rds&quot;))
+  
+  ... }</code></pre>
+<div class="figure" style="text-align: center">
+<img src="assets/images/figure4.png" alt="Figure  2: Local data frame, $\small t$." height="180" />
+<p class="caption">
+Figure 2: Local data frame, <span class="math inline">\(\small t\)</span>.
+</p>
+</div>
+<hr />
+<p>Now, we define the else statement, which provides alternative commands when data doesn’t exist in the Dropbox. When there’s no data to download, the function creates an empty data frame called <span class="math inline">\(t\)</span>. The data set is unique to the user, and it accepts six inputs: current time, tutorial id, tutorial version, user id, event, and data.</p>
+<pre class="r"><code>... {
+  
+  ...
+  
+  else {
+    t &lt;- tibble(
+      time = .POSIXct(numeric(0)),
+      tutorial_id = character(),
+      tutorial_version = character(),
+      user_id = character(),
+      event = character(),
+      data = list())
+    }
+  
+  ... }</code></pre>
+<hr />
+<p>Defining the above if-else statement pulls in the data frame <span class="math inline">\(t\)</span> that either includes a former user’s data frame or creates a new user’s empty data frame. We define a mechanism to bind the rows of the data frame, which takes the original data frame <span class="math inline">\(t\)</span> and adds an extra row.</p>
+<pre class="r"><code>... {
+  
+  ...
+
+  t &lt;- bind_rows(t, tibble(
+    time = Sys.time(),
+    tutorial_id = tutorial_id,
+    tutorial_version = tutorial_version,
+    user_id = user_id,
+    event = event,
+    data = list(data)
+  ))
+  
+  ... }</code></pre>
+<div class="figure" style="text-align: center">
+<img src="assets/images/figure5.png" alt="Figure  3: Binding rows of the data frame by taking $t$ and adding an extra row." height="180" />
+<p class="caption">
+Figure 3: Binding rows of the data frame by taking <span class="math inline">\(t\)</span> and adding an extra row.
+</p>
+</div>
+<hr />
+<p>Lastly, we instruct the code to save the RDS so that, whenever a user interacts with the tutorial, the function automatically appends a new row to the user’s data frame. This process documents constant updates to the data frame and uploads it back onto Dropbox.</p>
+<pre class="r"><code>... {
+  
+  ...
+  
+  
+  saveRDS(t, file = glue(&quot;data_{user_id}.rds&quot;))
+  drop_upload(file = glue(&quot;data_{user_id}.rds&quot;),
+              path = &quot;teaching-r-study&quot;)
+  }</code></pre>
+<p> </p>
+</div>
+<div id="putting-it-all-together" class="section level4">
+<h4>Putting it all together</h4>
+<pre class="r"><code>event_recorder &lt;- function(tutorial_id, tutorial_version, user_id, event, data) {
+  
+  if (drop_exists(glue(&quot;teaching-r-study/data_{user_id}.rds&quot;))) {
+    drop_download(path = glue(&quot;teaching-r-study/data_{user_id}.rds&quot;),
+                  local_path = glue(&quot;data_{user_id}.rds&quot;),
+                  overwrite = TRUE)}
+  
+  t &lt;- readRDS(glue(&quot;data_{user_id}.rds&quot;))
+  
+  else {t &lt;- tibble(
+    time = .POSIXct(numeric(0)),
+    tutorial_id = character(),
+    tutorial_version = character(),
+    user_id = character(),
+    event = character(),
+    data = list())}
+  
+  t &lt;- bind_rows(t, tibble(
+    time = Sys.time(),
+    tutorial_id = tutorial_id,
+    tutorial_version = tutorial_version,
+    user_id = user_id,
+    event = event,
+    data = list(data)))
+  
+  saveRDS(t, file = glue(&quot;data_{user_id}.rds&quot;))
+  drop_upload(file = glue(&quot;data_{user_id}.rds&quot;),
+              path = &quot;teaching-r-study&quot;)
+}</code></pre>
+<hr />
+<p>Now, we look into the deployment of questions. By default, the learnr module writes questions with correct answers and provides instant feedback that reveals the solution. However, this study uses assessments that aren’t supposed to give away solutions immediately. To change the module’s default, we create a new keyword class in the R space that marks every answer as correct. Regardless of whether answered correctly, the user will get the correct answer, letting them know they completed their submission and can move on.</p>
+<pre class="r"><code>question_is_correct.always_correct &lt;- function(question, value, ...) {
+  return(mark_as(TRUE, message = NULL))
+}</code></pre>
+<pre class="r"><code>question(&quot;This is your question?&quot;,
+         answer(&quot;This is an answer.&quot;, correct = TRUE),
+         type = c(&quot;always_correct&quot;, &quot;radio_button&quot;),
+         correct = &quot;Submitted&quot;)</code></pre>
+<hr />
+<p>We have a sneak peek at what the data will look like when going through the tutorial. There’s a column for each function input: current time, tutorial id, tutorial version, user id, event, and data. The data, a different list for each user event, holds the most critical information for analyzing results. We can sift, organize, and analyze through the copious amounts of data using the tidycode and Matahari packages.</p>
+<table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+time
+</th>
+<th style="text-align:left;">
+tutorial_id
+</th>
+<th style="text-align:left;">
+tutorial_version
+</th>
+<th style="text-align:left;">
+user_id
+</th>
+<th style="text-align:left;">
+event
+</th>
+<th style="text-align:left;">
+data
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2020-05-27 18:12:52
+</td>
+<td style="text-align:left;">
+/Useres/lucymcg…
+</td>
+<td style="text-align:left;">
+1.0
+</td>
+<td style="text-align:left;">
+lucymcg…
+</td>
+<td style="text-align:left;">
+exerc…
+</td>
+<td style="text-align:left;">
+&lt;nam…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2020-05-27 18:12:57
+</td>
+<td style="text-align:left;">
+/Useres/lucymcg…
+</td>
+<td style="text-align:left;">
+1.0
+</td>
+<td style="text-align:left;">
+lucymcg…
+</td>
+<td style="text-align:left;">
+exerc…
+</td>
+<td style="text-align:left;">
+&lt;nam…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2020-05-27 18:13:02
+</td>
+<td style="text-align:left;">
+/Useres/lucymcg…
+</td>
+<td style="text-align:left;">
+1.0
+</td>
+<td style="text-align:left;">
+lucymcg…
+</td>
+<td style="text-align:left;">
+exerc…
+</td>
+<td style="text-align:left;">
+&lt;nam…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2020-05-27 18:13:07
+</td>
+<td style="text-align:left;">
+/Useres/lucymcg…
+</td>
+<td style="text-align:left;">
+1.0
+</td>
+<td style="text-align:left;">
+lucymcg…
+</td>
+<td style="text-align:left;">
+exerc…
+</td>
+<td style="text-align:left;">
+&lt;nam…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2020-05-27 18:13:17
+</td>
+<td style="text-align:left;">
+/Useres/lucymcg…
+</td>
+<td style="text-align:left;">
+1.0
+</td>
+<td style="text-align:left;">
+lucymcg…
+</td>
+<td style="text-align:left;">
+exerc…
+</td>
+<td style="text-align:left;">
+&lt;nam…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2020-05-28 10:39:19
+</td>
+<td style="text-align:left;">
+/Useres/lucymcg…
+</td>
+<td style="text-align:left;">
+1.0
+</td>
+<td style="text-align:left;">
+lucymcg…
+</td>
+<td style="text-align:left;">
+exerc…
+</td>
+<td style="text-align:left;">
+&lt;nam…
+</td>
+</tr>
+</tbody>
+</table>
+<p>In conclusion, this study emphasizes the simplicity of using R Shiny, rdrop2, and learner packages to deploy a discrete method for collecting user participation data. By providing access to all user attempts, operations, clicks, skips, errors, time, etc. in a tutorial, R furthers valuable data collection, leading to vital analysis for answering complex questions.</p>
+<hr />
+</div>
+</div>
+<div id="references" class="section level3 unnumbered">
+<h3 class="unnumbered">References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Lucymcgowan/Talks" class="csl-entry">
+<span class="smallcaps">McGowan</span>, L.D. (2020) Best practices for teaching r a randomized controlled trial. <em>Lucymcgowan.com/Talks</em>.
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
