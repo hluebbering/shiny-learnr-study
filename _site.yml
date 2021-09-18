@@ -1,0 +1,6 @@
+name: "Learnr-Shiny"
+navbar:
+  title: "Shiny + Learnr Study"
+  # left:
+  #   - text: "Home"
+  #     href: index.html
