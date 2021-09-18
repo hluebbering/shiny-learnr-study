@@ -22,7 +22,7 @@ figcap <- captioner(prefix="Figure")
 
 ## Shiny Applications
 
-Shiny is an R package developed for building interactive web applications. Visual outputs resemble an easy-to-visit website offering instant feedback from user input. The code written in the Shiny application framework controls the interface. Within the framework, the Shiny package offers highly interactive tools such as widgets for simplicity of use for application programmers and users. Without needing to adjust the source code, users can interact with the flexible user interface and see the change of inputs immediately reflected in the output. The interactive nature allows users to change parameters, run R code, and see results directly from their browser. 
+Shiny is an R package developed for building interactive web applications. Visual outputs resemble an easy-to-visit website offering instant feedback from user input. Within the framework, the Shiny package offers highly interactive tools such as widgets for simplicity of use for application programmers and users. Without needing to adjust the source code, users can interact with the flexible user interface and see the change of inputs immediately reflected in the output.
 
 
 
@@ -41,9 +41,7 @@ knitr::include_graphics("assets/images/picture1.jpg")
 
 
 
-
-This study used the Shiny package to create this cross-random trial. The Shiny package can host a application as a website that runs R code behind the scenes. For example, the study’s informed consent page automatically randomizes the participant into the tidyverse first group or base first group. A Shiny app is a directory structured by two main functions: a server function and a user interface (UI) function.
-
+This study used the Shiny package to create this cross-random trial, which can host an application as a website that runs R code behind the scenes. For example, the study’s informed consent page automatically randomizes the participant into the tidyverse first group or base first group. A Shiny app is a directory structured by two main functions: a server function and a user interface (UI) function.
 
 ```{r, echo=TRUE, eval=FALSE}
 shinyApp(ui = ui, server = server)
@@ -52,7 +50,7 @@ shinyApp(ui = ui, server = server)
 
 
 
-The server function is a set of instructions that build the application’s computational components and run complex R code behind the scenes. In this study, the server function acts as a random number generator to randomize participants into groups $A$ or $B$. The function runs a reactive expression containing an R statement, which creates a random uniform variable. If the uniform variable is greater than $0.5$, A will be the output; otherwise, B will be the output. The last line of the function makes sure that the created random variable will not suspend when hidden.
+The server function is a set of instructions that build the application’s computational components and run R code behind the scenes. Here, the server function acts as a random number generator to randomize participants into groups A or B. The function runs a reactive expression containing an R statement, which creates a random uniform variable. If the uniform variable is greater than 0.5, A will be the output; otherwise, B will be the output. The last line of the function makes sure that the created random variable will not suspend when hidden.
 
 
 ```{r, echo=TRUE, eval=FALSE}
@@ -97,9 +95,7 @@ If the random output is B, then the action button opens a new window to the Shin
 ## Learnr Package
 
 
-The learner package can turn any R Markdown document into a collaborative solution for facilitating statistics and R programming tutorials. Building on R Markdown, the learnr package enables interactive tutorials featuring various interactive Shiny components. Users can access these interactive tutorials from their browser, via the same mechanisms as a Shiny application. The code exercises created in the learner package display as R code blocks; the user can edit and execute them directly. Progress is automatically preserved, allowing users to save and keep track of completed exercises or questions. 
-
-In addition to supporting interactive tutorials, the learnr package includes built in tools for checking and reinforcing students’ understanding. Users are free to adjust code-snippets, complete coding exercises, read hints and solutions, and execute their code. In the context of this study, we utilize the learnr package as a tool for hosting online experiments designed to examine best practices for teaching statistical or programming concepts.
+Building on R Markdown, the learnr package enables interactive tutorials featuring various interactive Shiny components. Users can access these interactive tutorials from their browser, via the same mechanisms as a Shiny application. The code exercises created in the learner package display as R code blocks; the user can edit and execute them directly. Progress is automatically preserved, allowing users to save and keep track of completed exercises or questions. In the context of this study, we utilize the learnr package as a tool for hosting online experiments designed to examine best practices for teaching statistical or programming concepts.
 
 
 
@@ -169,7 +165,6 @@ options(tutorial.event_recorder = event_recorder)
 
 
 
------
 
 
 
@@ -185,7 +180,7 @@ Now, we'll define what goes inside of the _event_recorder_ function. The first p
   ... }
 ```
 
------
+
 
 Next, the rds file reads into a local data frame called $t$. We use the glue package to link the data to the user id, ensuring the dataset remains unique for each student.
 
@@ -205,7 +200,7 @@ cap2 <- figcap("caption2", "Local data frame, $\\small t$.")
 knitr::include_graphics("assets/images/figure4.png")
 ```
 
------
+\ 
 
 Now, we define the else statement, which provides alternative commands when data doesn’t exist in the Dropbox. When there’s no data to download, the function creates an empty data frame called $t$. The data set is unique to the user, and it accepts six inputs: current time, tutorial id, tutorial version, user id, event, and data.
 
@@ -229,7 +224,7 @@ Now, we define the else statement, which provides alternative commands when data
 
 
 
------
+
 
 Defining the above if-else statement pulls in the data frame $t$ that either includes a former user’s data frame or creates a new user’s empty data frame. We define a mechanism to bind the rows of the data frame, which takes the original data frame $t$ and adds an extra row.
 
@@ -260,7 +255,9 @@ knitr::include_graphics("assets/images/figure5.png")
 ```
 
 
---------------------
+
+\ 
+
 
 Lastly, we instruct the code to save the RDS so that, whenever a user interacts with the tutorial, the function automatically appends a new row to the user’s data frame. This process documents constant updates to the data frame and uploads it back onto Dropbox.
 
@@ -281,7 +278,7 @@ Lastly, we instruct the code to save the RDS so that, whenever a user interacts 
 
 
 
-#### Putting it all together
+##### Putting it all together
 
 ```{r, eval=FALSE, echo=TRUE}
 event_recorder <- function(tutorial_id, tutorial_version, user_id, event, data) {
@@ -335,7 +332,7 @@ question("This is your question?",
          correct = "Submitted")
 ```
 
------
+
 
 
 We have a sneak peek at what the data will look like when going through the tutorial. There’s a column for each function input: current time, tutorial id, tutorial version, user id, event, and data. The data, a different list for each user event, holds the most critical information for analyzing results. We can sift, organize, and analyze through the copious amounts of data using the tidycode and Matahari packages.
