@@ -1,7 +1,7 @@
 ---
 title: "Shiny and Learnr in Randomized Trials"
 author: "DM Data Science Lab | Hannah Luebbering & Lucy McGowan"
-subtitle: "Examining Best Practices in Teaching Data Science"
+# subtitle: "Examining Best Practices in Teaching Data Science"
 date: "June 17, 2020"
 output: 
   html_document: 
